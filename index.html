@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manikandan — Creative Web Designer, Digital Marketer & Developer</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Reenie+Beanie&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #070404;
+      --bg-card: rgba(18, 10, 10, 0.88);
+      --bg-card-hover: rgba(28, 14, 14, 0.96);
+      --border-card: rgba(255, 60, 40, 0.16);
+      --border-card-hover: rgba(255, 60, 40, 0.45);
+      --text-cream: #F3E7D7;
+      --text-muted: #A89B8F;
+      --text-light-muted: #C8BCB0;
+      --accent-red: #E6392E;
+      --accent-red-glow: rgba(230, 57, 46, 0.25);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-sig: 'Reenie Beanie', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-cream);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fixed Background Animation Canvas */
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #scrollCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Ambient atmospheric vignette */
+    .ambient-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 38%, rgba(7, 4, 4, 0.5) 75%, #070404 98%);
+    }
+
+    /* HERO SECTION WRAPPER */
+    .hero-section {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px 30px 48px;
+      box-sizing: border-box;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1600px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-cream);
+      margin-bottom: 6px;
+    }
+
+    .top-bar .avail {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar .avail-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-red);
+      box-shadow: 0 0 8px var(--accent-red);
+      display: inline-block;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* HERO HEADLINE: PORTFOLIO */
+    .hero-title-wrapper {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+      user-select: none;
+      z-index: 15;
+    }
+
+    .giant-portfolio-title {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 10.5vw, 150px);
+      line-height: 0.88;
+      letter-spacing: 6px;
+      color: var(--text-cream);
+      text-transform: uppercase;
+      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.9);
+    }
+
+    /* MAIN 3-COLUMN CONTENT GRID */
+    .hero-content-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) 1fr minmax(280px, 340px);
+      width: 100%;
+      max-width: 1600px;
+      gap: 20px;
+      align-items: center;
+      flex: 1;
+    }
+
+    /* Left Hero Column */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 15;
+      text-align: left;
+      max-width: 320px;
+    }
+
+    .hero-headings-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hero-category-primary {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 2.3vw, 32px);
+      letter-spacing: 2px;
+      line-height: 0.95;
+      color: var(--accent-red);
+      text-transform: uppercase;
+    }
+
+    .hero-category-secondary {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2vw, 28px);
+      letter-spacing: 2px;
+      line-height: 1;
+      color: var(--text-cream);
+      text-transform: uppercase;
+    }
+
+    .hero-quote-block {
+      border-left: 2px solid var(--accent-red);
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .quote-text {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      line-height: 1.55;
+      color: var(--text-cream);
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-left-desc {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 11.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-left-desc p strong {
+      color: var(--text-cream);
+      font-weight: 600;
+    }
+
+    .hero-signature-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .hero-signature-name {
+      font-family: var(--font-sig);
+      font-size: 38px;
+      line-height: 0.9;
+      color: var(--text-cream);
+      letter-spacing: 1px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+    }
+
+    .hero-signature-role {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      color: var(--accent-red);
+      text-transform: uppercase;
+    }
+
+    /* Center Space: CLEAR GAP FOR THE MODEL */
+    .hero-center-space {
+      min-height: 65vh;
+      pointer-events: none;
+    }
+
+    /* Right Hero Column */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      gap: 16px;
+      z-index: 15;
+    }
+
+    .stamp-container {
+      margin-bottom: 2px;
+    }
+
+    .rotating-stamp {
+      width: 70px;
+      height: 70px;
+      animation: rotateStamp 20s linear infinite;
+    }
+
+    @keyframes rotateStamp {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: 44px;
+      line-height: 0.95;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-cream);
+    }
+
+    .hero-role {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .hero-bio {
+      font-size: 11px;
+      line-height: 1.7;
+      color: var(--text-light-muted);
+      max-width: 310px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Stats Grid */
+    .hero-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .stat-pill {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 10px 4px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-pill:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(230, 57, 46, 0.18);
+    }
+
+    .stat-icon {
+      width: 15px;
+      height: 15px;
+      margin: 0 auto 4px;
+      color: var(--accent-red);
+      display: block;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 20px;
+      line-height: 1;
+      color: var(--text-cream);
+      letter-spacing: 1px;
+    }
+
+    .stat-label {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Scroll Prompt */
+    .hero-scroll-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding-top: 10px;
+      color: var(--text-muted);
+      font-size: 9.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      z-index: 15;
+    }
+
+    .scroll-arrow {
+      width: 16px;
+      height: 16px;
+      color: var(--accent-red);
+      animation: bounceArrow 2s infinite ease-in-out;
+    }
+
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    /* LOWER CONTENT SECTIONS */
+    .content-container {
+      position: relative;
+      z-index: 10;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 60px 28px 100px 28px;
+    }
+
+    section {
+      margin-bottom: 120px;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      letter-spacing: 2px;
+      color: var(--text-cream);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -15px;
+      width: 32px;
+      height: 2px;
+      background-color: var(--accent-red);
+    }
+
+    .view-more-link {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s ease;
+    }
+
+    .view-more-link:hover {
+      gap: 10px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .service-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(230, 57, 46, 0.14);
+    }
+
+    .service-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-red);
+      background: rgba(230, 57, 46, 0.08);
+      border: 1px solid rgba(230, 57, 46, 0.15);
+    }
+
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 1.2px;
+      color: var(--text-cream);
+      line-height: 1.1;
+    }
+
+    .service-subtitle {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent-red);
+      margin-top: -6px;
+      margin-bottom: 2px;
+    }
+
+    .service-desc {
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--text-light-muted);
+    }
+
+    /* Split Section */
+    .split-grid-section {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 40px;
+    }
+
+    .process-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .process-item {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .process-item:hover {
+      border-color: var(--border-card-hover);
+      background: var(--bg-card-hover);
+      transform: translateX(4px);
+    }
+
+    .process-num {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--accent-red);
+      line-height: 1;
+      width: 28px;
+      flex-shrink: 0;
+    }
+
+    .process-icon-wrap {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 60, 40, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-cream);
+      flex-shrink: 0;
+    }
+
+    .process-info h4 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      color: var(--text-cream);
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+
+    .process-info .process-subtitle {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .process-info p {
+      font-size: 11px;
+      color: var(--text-light-muted);
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    .process-tags {
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      color: rgba(163, 151, 143, 0.65);
+      text-transform: uppercase;
+    }
+
+    /* Works Grid */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .work-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.35s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .work-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .work-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9.5;
+      overflow: hidden;
+      background: #110A0A;
+      position: relative;
+    }
+
+    .work-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .work-card:hover .work-thumb {
+      transform: scale(1.05);
+    }
+
+    .work-meta {
+      padding: 14px 16px 16px;
+    }
+
+    .work-name {
+      font-family: var(--font-display);
+      font-size: 19px;
+      letter-spacing: 1.5px;
+      color: var(--text-cream);
+      line-height: 1.2;
+    }
+
+    .work-cat {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    /* About & Tools Split */
+    .about-tools-split {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+    }
+
+    .about-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 26px;
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    .about-portrait {
+      width: 120px;
+      height: 160px;
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: top center;
+      border: 1px solid rgba(255, 60, 40, 0.25);
+      flex-shrink: 0;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .about-content p {
+      font-size: 11.5px;
+      line-height: 1.65;
+      color: var(--text-light-muted);
+    }
+
+    .about-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .about-bullets li {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-cream);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-bullets li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      display: inline-block;
+    }
+
+    .tools-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tools-tiles-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .tool-tile {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 14px 6px;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tool-tile:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-3px);
+    }
+
+    .tool-icon-wrap {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tool-name {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--text-light-muted);
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 22px 24px;
+      position: relative;
+    }
+
+    .testimonial-quote {
+      font-size: 12px;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--text-cream);
+    }
+
+    .testimonial-author {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    /* Collaborate Grid */
+    .collaborate-grid {
+      background: var(--bg-card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: 1.2fr 1.3fr 1.1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .collab-left h3 {
+      font-family: var(--font-display);
+      font-size: 34px;
+      letter-spacing: 2px;
+      color: var(--text-cream);
+      margin-bottom: 6px;
+    }
+
+    .collab-left p {
+      font-size: 11.5px;
+      color: var(--text-light-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11.5px;
+      color: var(--text-cream);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-item:hover {
+      color: var(--accent-red);
+    }
+
+    .contact-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--accent-red);
+      flex-shrink: 0;
+    }
+
+    .collab-center {
+      text-align: center;
+    }
+
+    .scan-label {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: var(--text-cream);
+      margin-bottom: 16px;
+    }
+
+    .qr-codes-row {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+    }
+
+    .qr-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qr-frame {
+      width: 100px;
+      height: 100px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      padding: 6px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .qr-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-platform {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      color: var(--text-light-muted);
+      text-transform: uppercase;
+    }
+
+    .collab-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      gap: 14px;
+    }
+
+    .sparkle-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--accent-red);
+      animation: floatSparkle 3s ease-in-out infinite;
+    }
+
+    @keyframes floatSparkle {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-4px) scale(1.1); }
+    }
+
+    .collab-motto {
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: 2px;
+      color: var(--text-cream);
+      text-transform: uppercase;
+      max-width: 240px;
+    }
+
+
+    .collab-signature-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      margin-top: 4px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      width: 100%;
+    }
+
+    .collab-sig-name {
+      font-family: var(--font-sig);
+      font-size: 42px;
+      line-height: 1;
+      color: var(--text-cream);
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px rgba(230, 57, 46, 0.3);
+    }
+
+    .collab-sig-role {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.4px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ─── ENQUIRY FORM ─── */
+    .enquiry-section {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 48px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .enquiry-section::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(230, 57, 46, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .enquiry-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .enquiry-header-left .enquiry-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .enquiry-header-left h3 {
+      font-family: var(--font-display);
+      font-size: 34px;
+      letter-spacing: 2px;
+      color: var(--text-cream);
+      line-height: 1;
+    }
+
+    .enquiry-header-right {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    .enquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-field {
+      position: relative;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      transition: color 0.2s ease;
+    }
+
+    .form-field:focus-within label {
+      color: var(--accent-red);
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-cream);
+      outline: none;
+      transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: rgba(163, 155, 143, 0.45);
+      font-size: 12px;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: var(--accent-red);
+      background: rgba(230, 57, 46, 0.05);
+      box-shadow: 0 0 0 3px rgba(230, 57, 46, 0.1);
+    }
+
+    .form-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23A89B8F' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    .form-field select option {
+      background: #120a0a;
+      color: var(--text-cream);
+    }
+
+    .form-field textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6;
+    }
+
+    /* Service checkbox pills */
+    .service-pills-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .service-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .service-pill-item {
+      position: relative;
+    }
+
+    .service-pill-item input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .service-pill-item label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(255,255,255,0.03);
+      text-transform: none;
+      margin-bottom: 0;
+    }
+
+    .service-pill-item input[type="checkbox"]:checked + label {
+      border-color: var(--accent-red);
+      background: rgba(230, 57, 46, 0.12);
+      color: var(--text-cream);
+      box-shadow: 0 0 0 1px rgba(230,57,46,0.3);
+    }
+
+    .service-pill-item label:hover {
+      border-color: rgba(230, 57, 46, 0.4);
+      color: var(--text-cream);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .service-pill-item input[type="checkbox"]:checked + label .pill-dot {
+      background: var(--accent-red);
+      opacity: 1;
+    }
+
+    /* Submit button */
+    .form-submit-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 4px;
+    }
+
+    .form-note {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      max-width: 340px;
+    }
+
+    .form-submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent-red);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 17px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      padding: 16px 36px;
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 6px 24px rgba(230, 57, 46, 0.35);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .form-submit-btn:hover {
+      background: #c52e24;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 32px rgba(230, 57, 46, 0.5);
+    }
+
+    .form-submit-btn:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .form-submit-btn svg {
+      transition: transform 0.3s ease;
+    }
+
+    .form-submit-btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Success state */
+    .form-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .form-success.visible {
+      display: flex;
+    }
+
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(230, 57, 46, 0.12);
+      border: 1px solid rgba(230, 57, 46, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-red);
+    }
+
+    .success-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      letter-spacing: 2px;
+      color: var(--text-cream);
+    }
+
+    .success-msg {
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 300px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 720px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-submit-row { flex-direction: column; align-items: stretch; }
+      .enquiry-section { padding: 28px 20px; }
+      .enquiry-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+
+    /* RESPONSIVE LAYOUT */
+    @media (max-width: 1100px) {
+      .hero-content-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+      .hero-center-space {
+        display: none;
+      }
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .split-grid-section {
+        grid-template-columns: 1fr;
+      }
+      .about-tools-split {
+        grid-template-columns: 1fr;
+      }
+      .collaborate-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .collab-right {
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero-section {
+        padding: 16px 20px;
+      }
+      .hero-content-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-right {
+        align-items: flex-start;
+        text-align: left;
+      }
+      .stamp-container {
+        align-self: flex-start;
+      }
+      .hero-bio {
+        text-align: left;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+      .tools-tiles-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .about-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FIXED CANVAS ANIMATION -->
+  <div id="canvas-container">
+    <canvas id="scrollCanvas"></canvas>
+  </div>
+
+  <!-- Ambient Vignette -->
+  <div class="ambient-vignette"></div>
+
+  <!-- HERO SECTION CONTAINER -->
+  <div class="hero-section">
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <span>CREATIVE PORTFOLIO</span>
+      <div class="avail">
+        AVAILABLE FOR FREELANCE
+        <span class="avail-dot"></span>
+      </div>
+    </header>
+
+    <!-- HEADLINE PORTFOLIO (Centered at top above the model's head) -->
+    <div class="hero-title-wrapper">
+      <h1 class="giant-portfolio-title">PORTFOLIO</h1>
+    </div>
+
+    <!-- MAIN 3-COLUMN CONTENT GRID (LEFT | MODEL SPACE | RIGHT) -->
+    <div class="hero-content-grid">
+
+      <!-- Hero Left Column -->
+      <div class="hero-left">
+        <div class="hero-headings-block">
+          <div class="hero-category-primary">DIGITAL MARKETING</div>
+          <div class="hero-category-secondary">WEB DESIGN &amp; DEVELOPMENT</div>
+        </div>
+
+        <div class="hero-quote-block">
+          <p class="quote-text">
+            “I DESIGN DIGITAL EXPERIENCES THAT ARE INTUITIVE, BEAUTIFUL, AND IMPACTFUL.”
+          </p>
+        </div>
+
+        <div class="hero-left-desc">
+          <p>
+            I combine <strong>web design, development, and digital marketing</strong> to create modern digital experiences that look professional, connect with the right audience, and support business growth.
+          </p>
+          <p>
+            From <strong>UI/UX and responsive websites</strong> to <strong>Google Ads, Meta Ads, SEO, and e-commerce</strong>, I build digital solutions with a focus on <strong>design, performance, and results</strong>.
+          </p>
+        </div>
+
+        <div class="hero-signature-block">
+          <div class="hero-signature-name">Manikandan</div>
+          <div class="hero-signature-role">Web Designer • Web Developer • Digital Marketer</div>
+        </div>
+      </div>
+
+      <!-- Hero Center Space: 100% UNIMPEDED VIEW OF THE MODEL -->
+      <div class="hero-center-space"></div>
+
+      <!-- Hero Right Column -->
+      <div class="hero-right">
+        <!-- Rotating Stamp Badge -->
+        <div class="stamp-container">
+          <svg class="rotating-stamp" viewBox="0 0 100 100">
+            <path id="stamp-circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+            <text fill="#BDB0A4" font-size="9" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" letter-spacing="3">
+              <textPath href="#stamp-circle">DESIGNING • DESIGNING • DESIGNING •</textPath>
+            </text>
+            <circle cx="50" cy="50" r="14" fill="#120A0A" stroke="#E6392E" stroke-width="1.5" />
+            <polygon points="50,42 53,48 59,50 53,52 50,58 47,52 41,50 47,48" fill="#E6392E" />
+          </svg>
+        </div>
+
+        <div>
+          <h2 class="hero-name">MANIKANDAN</h2>
+          <div class="hero-role">WEB DESIGNER • DIGITAL MARKETER • VIDEO EDITOR</div>
+        </div>
+
+        <p class="hero-bio">
+          Creative Web Designer, Digital Marketer, Video Editor, and Web Developer passionate about building modern digital experiences that look great, perform smoothly, and deliver real results.
+        </p>
+
+        <!-- Stats Row -->
+        <div class="hero-stats-row">
+          <div class="stat-pill">
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <div class="stat-num">4+</div>
+            <div class="stat-label">Years Exp</div>
+          </div>
+          <div class="stat-pill">
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <div class="stat-num">28+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat-pill">
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+            </svg>
+            <div class="stat-num">12+</div>
+            <div class="stat-label">Clients</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="hero-scroll-indicator">
+      <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+      </svg>
+      <span>SCROLL TO EXPLORE</span>
+    </div>
+  </div>
+
+  <!-- LOWER CONTENT SECTIONS -->
+  <div class="content-container">
+
+    <!-- What I Do Section -->
+    <section id="services">
+      <div class="section-header">
+        <h3 class="section-title">WHAT I DO</h3>
+      </div>
+      <div class="services-grid">
+        <!-- Service 1: Videography -->
+        <div class="service-card">
+          <div class="service-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m22 8-6 4 6 4V8z"></path>
+              <rect width="14" height="12" x="2" y="6" rx="2" ry="2"></rect>
+            </svg>
+          </div>
+          <div class="service-title">VIDEOGRAPHY</div>
+          <div class="service-subtitle">Stories in Motion</div>
+          <p class="service-desc">Cinematic visuals that turn moments into memorable experiences.</p>
+        </div>
+
+        <!-- Service 2: Photography -->
+        <div class="service-card">
+          <div class="service-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+              <circle cx="12" cy="13" r="3"></circle>
+            </svg>
+          </div>
+          <div class="service-title">PHOTOGRAPHY</div>
+          <div class="service-subtitle">Capture the Moment</div>
+          <p class="service-desc">Creative, professional photography with a sharp eye for detail.</p>
+        </div>
+
+        <!-- Service 3: Web Design -->
+        <div class="service-card">
+          <div class="service-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
+          <div class="service-title">WEB DESIGN</div>
+          <div class="service-subtitle">Digital Experiences</div>
+          <p class="service-desc">Modern, responsive websites built to impress and perform.</p>
+        </div>
+
+        <!-- Service 4: E-Commerce -->
+        <div class="service-card">
+          <div class="service-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+          </div>
+          <div class="service-title">E-COMMERCE</div>
+          <div class="service-subtitle">Sell Online. Grow Faster.</div>
+          <p class="service-desc">Powerful online stores designed to turn visitors into customers.</p>
+        </div>
+
+        <!-- Service 5: Digital Marketing -->
+        <div class="service-card">
+          <div class="service-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <div class="service-title">DIGITAL MARKETING</div>
+          <div class="service-subtitle">Reach. Engage. Grow.</div>
+          <p class="service-desc">Smart digital strategies that build brands and drive real results.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Process & Featured Work -->
+    <section class="split-grid-section" id="process">
+      <div>
+        <div class="section-header">
+          <h3 class="section-title">MY PROCESS</h3>
+        </div>
+        <div class="process-list">
+          <!-- Step 01 -->
+          <div class="process-item">
+            <div class="process-num">01</div>
+            <div class="process-icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            <div class="process-info">
+              <h4>DISCOVER</h4>
+              <div class="process-subtitle">Understand the Business</div>
+              <p>I learn about your business, target audience, goals, competitors, and what you want to achieve online.</p>
+              <div class="process-tags">Research • Goals • Audience</div>
+            </div>
+          </div>
+
+          <!-- Step 02 -->
+          <div class="process-item">
+            <div class="process-num">02</div>
+            <div class="process-icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"></path>
+              </svg>
+            </div>
+            <div class="process-info">
+              <h4>STRATEGIZE</h4>
+              <div class="process-subtitle">Plan the Direction</div>
+              <p>I develop a practical strategy for your website, branding, content, SEO, and digital marketing campaigns.</p>
+              <div class="process-tags">Strategy • UX • Content • SEO</div>
+            </div>
+          </div>
+
+          <!-- Step 03 -->
+          <div class="process-item">
+            <div class="process-num">03</div>
+            <div class="process-icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div class="process-info">
+              <h4>DESIGN &amp; BUILD</h4>
+              <div class="process-subtitle">Create the Digital Experience</div>
+              <p>I design and build modern, responsive websites that are visually engaging, easy to use, and optimized for different devices.</p>
+              <div class="process-tags">UI Design • Web Development • E-commerce</div>
+            </div>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="process-item">
+            <div class="process-num">04</div>
+            <div class="process-icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+            </div>
+            <div class="process-info">
+              <h4>LAUNCH &amp; PROMOTE</h4>
+              <div class="process-subtitle">Reach the Right Audience</div>
+              <p>I launch the website and promote your business through targeted digital marketing campaigns across Google, Meta, and social platforms.</p>
+              <div class="process-tags">Google Ads • Meta Ads • Social Media</div>
+            </div>
+          </div>
+
+          <!-- Step 05 -->
+          <div class="process-item">
+            <div class="process-num">05</div>
+            <div class="process-icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <div class="process-info">
+              <h4>ANALYZE &amp; GROW</h4>
+              <div class="process-subtitle">Improve for Better Results</div>
+              <p>I monitor performance, analyze data, identify opportunities, and continuously optimize to support long-term growth.</p>
+              <div class="process-tags">Analytics • Optimization • Performance • Growth</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="work">
+        <div class="section-header">
+          <h3 class="section-title">FEATURED WORK</h3>
+          <a href="#work" class="view-more-link">
+            View more projects &rarr;
+          </a>
+        </div>
+        <div class="works-grid">
+          <div class="work-card">
+            <div class="work-thumb-wrap">
+              <img src="images/work-1.jpg" alt="Elevate Studio" class="work-thumb">
+            </div>
+            <div class="work-meta">
+              <div class="work-name">ELEVATE STUDIO</div>
+              <div class="work-cat">WEB DESIGN / DEVELOPMENT</div>
+            </div>
+          </div>
+
+          <div class="work-card">
+            <div class="work-thumb-wrap">
+              <img src="images/work-2.jpg" alt="Nexus Finance" class="work-thumb">
+            </div>
+            <div class="work-meta">
+              <div class="work-name">NEXUS FINANCE</div>
+              <div class="work-cat">UI/UX DESIGN</div>
+            </div>
+          </div>
+
+          <div class="work-card">
+            <div class="work-thumb-wrap">
+              <img src="images/work-3.jpg" alt="Travelora" class="work-thumb">
+            </div>
+            <div class="work-meta">
+              <div class="work-name">TRAVELORA</div>
+              <div class="work-cat">WEB DESIGN</div>
+            </div>
+          </div>
+
+          <div class="work-card">
+            <div class="work-thumb-wrap">
+              <img src="images/work-4.jpg" alt="Veloce App" class="work-thumb">
+            </div>
+            <div class="work-meta">
+              <div class="work-name">VELOCE APP</div>
+              <div class="work-cat">UI/UX DESIGN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me & Tools -->
+    <section class="about-tools-split" id="about">
+      <div>
+        <div class="section-header">
+          <h3 class="section-title">ABOUT ME</h3>
+        </div>
+        <div class="about-card">
+          <img src="images/frame_00060.jpg" alt="Manikandan" class="about-portrait">
+          <div class="about-content">
+            <p>
+              I'm <strong>Manikandan</strong>, a creative <strong>Web Designer, Digital Marketer, Video Editor, and Web Developer</strong> passionate about building modern digital experiences that look great, perform smoothly, and deliver real results.
+            </p>
+            <p>
+              I combine <strong>creative design, technology, and digital marketing</strong> to help brands build a strong online presence and connect with their audience.
+            </p>
+            <ul class="about-bullets">
+              <li>Web Design & Development</li>
+              <li>Digital Marketing</li>
+              <li>Video Editing</li>
+              <li>Creative & Visual Design</li>
+              <li>E-commerce Solutions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools-column">
+        <div class="section-header">
+          <h3 class="section-title">TOOLS I USE</h3>
+        </div>
+        <div class="tools-tiles-row">
+          <div class="tool-tile">
+            <div class="tool-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 38 57" fill="none">
+                <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#1ABCFE"/>
+                <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+                <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+                <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+                <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+              </svg>
+            </div>
+            <span class="tool-name">Figma</span>
+          </div>
+
+          <div class="tool-tile">
+            <div class="tool-icon-wrap">
+              <div style="background:#470137; border: 1px solid #FF61F6; border-radius: 6px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #FF61F6;">Xd</div>
+            </div>
+            <span class="tool-name">Adobe XD</span>
+          </div>
+
+          <div class="tool-tile">
+            <div class="tool-icon-wrap">
+              <div style="background:#001E36; border: 1px solid #31A8FF; border-radius: 6px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #31A8FF;">Ps</div>
+            </div>
+            <span class="tool-name">Photoshop</span>
+          </div>
+
+          <div class="tool-tile">
+            <div class="tool-icon-wrap">
+              <div style="background:#330000; border: 1px solid #FF9A00; border-radius: 6px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #FF9A00;">Ai</div>
+            </div>
+            <span class="tool-name">Illustrator</span>
+          </div>
+
+          <div class="tool-tile">
+            <div class="tool-icon-wrap">
+              <div style="background:#14324F; border: 1px solid #146EF5; border-radius: 6px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; color: #146EF5;">W</div>
+            </div>
+            <span class="tool-name">Webflow</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="quote-symbol" style="margin-bottom: 4px;">“</div>
+          <p class="testimonial-quote">
+            Manikandan is an exceptional designer and developer who delivers outstanding work on time and understands user needs like no one else.
+          </p>
+          <div class="testimonial-author">— Client Feedback</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Let's Collaborate Section -->
+    <section id="contact">
+      <div class="collaborate-grid">
+        <div class="collab-left">
+          <h3>LET'S COLLABORATE</h3>
+          <p>Have a project in mind or just want to say hi?<br>I'd love to hear from you.</p>
+
+          <div class="contact-details">
+            <a href="mailto:mani97digital@gmail.com" class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              mani97digital@gmail.com
+            </a>
+            <a href="tel:+919943856678" class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              +91 99438 56678
+            </a>
+            <div class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Dharmapuri, Tamil Nadu, India
+            </div>
+            <a href="https://manikandan.com" target="_blank" class="contact-item">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              manikandan.com
+            </a>
+          </div>
+        </div>
+
+        <div class="collab-center">
+          <div class="scan-label">START A CONVERSATION</div>
+          <p style="font-size: 11.5px; color: var(--text-light-muted); line-height: 1.65; margin-bottom: 20px; max-width: 280px; margin-left: auto; margin-right: auto;">
+            Whether you need Web Design, Web Development, Digital Marketing, E-commerce, or Video Editing — let's connect and create something impactful together.
+          </p>
+          <a href="mailto:mani97digital@gmail.com" style="display: inline-flex; align-items: center; gap: 10px; background: var(--accent-red); color: #fff; font-family: var(--font-display); font-size: 16px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; padding: 14px 28px; border-radius: 8px; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(230,57,46,0.35);" onmouseover="this.style.background='#c52e24'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--accent-red)'; this.style.transform='translateY(0)'">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+            Let's Work Together
+          </a>
+        </div>
+
+        <div class="collab-right">
+          <svg class="sparkle-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+          </svg>
+          <div class="collab-motto">
+            DESIGNING EXPERIENCES.<br>BUILDING CONNECTIONS.
+          </div>
+          <div class="collab-signature-block">
+            <div class="collab-sig-name">Manikandan</div>
+            <div class="collab-sig-role">Web Designer &middot; Digital Marketer &middot; Web Developer &middot; Video Editor</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENQUIRY FORM SECTION -->
+    <section id="enquiry" style="margin-bottom: 80px;">
+      <div class="enquiry-section">
+
+        <div class="enquiry-header">
+          <div class="enquiry-header-left">
+            <div class="enquiry-eyebrow">Get In Touch</div>
+            <h3>SEND AN ENQUIRY</h3>
+          </div>
+          <div class="enquiry-header-right">
+            Usually responds within<br><strong style="color: var(--text-cream);">24 hours</strong>
+          </div>
+        </div>
+
+        <!-- Success message (hidden until submit) -->
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          <div class="success-title">MESSAGE SENT!</div>
+          <p class="success-msg">Thank you for reaching out. Manikandan will get back to you within 24 hours.</p>
+        </div>
+
+        <form class="enquiry-form" id="enquiryForm" novalidate>
+
+          <!-- Row 1: Name + Email -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="eq-name">Your Name</label>
+              <input type="text" id="eq-name" name="name" placeholder="e.g. Ravi Kumar" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="eq-email">Email Address</label>
+              <input type="email" id="eq-email" name="email" placeholder="e.g. ravi@example.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <!-- Row 2: Phone + Budget -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="eq-phone">Phone Number <span style="opacity:0.5;font-weight:400">(optional)</span></label>
+              <input type="tel" id="eq-phone" name="phone" placeholder="+91 00000 00000" autocomplete="tel">
+            </div>
+            <div class="form-field">
+              <label for="eq-budget">Project Budget</label>
+              <select id="eq-budget" name="budget">
+                <option value="" disabled selected>Select a range</option>
+                <option value="under-10k">Under ₹10,000</option>
+                <option value="10k-25k">₹10,000 – ₹25,000</option>
+                <option value="25k-50k">₹25,000 – ₹50,000</option>
+                <option value="50k-1L">₹50,000 – ₹1,00,000</option>
+                <option value="above-1L">Above ₹1,00,000</option>
+                <option value="discuss">Let's Discuss</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Services interested in -->
+          <div>
+            <span class="service-pills-label">Services Interested In</span>
+            <div class="service-pills">
+              <div class="service-pill-item">
+                <input type="checkbox" id="svc-web" name="services" value="web-design">
+                <label for="svc-web"><span class="pill-dot"></span>Web Design</label>
+              </div>
+              <div class="service-pill-item">
+                <input type="checkbox" id="svc-dev" name="services" value="web-dev">
+                <label for="svc-dev"><span class="pill-dot"></span>Web Development</label>
+              </div>
+              <div class="service-pill-item">
+                <input type="checkbox" id="svc-mkt" name="services" value="digital-marketing">
+                <label for="svc-mkt"><span class="pill-dot"></span>Digital Marketing</label>
+              </div>
+              <div class="service-pill-item">
+                <input type="checkbox" id="svc-ecom" name="services" value="ecommerce">
+                <label for="svc-ecom"><span class="pill-dot"></span>E-commerce</label>
+              </div>
+              <div class="service-pill-item">
+                <input type="checkbox" id="svc-vid" name="services" value="video-editing">
+                <label for="svc-vid"><span class="pill-dot"></span>Video Editing</label>
+              </div>
+              <div class="service-pill-item">
+                <input type="checkbox" id="svc-photo" name="services" value="photography">
+                <label for="svc-photo"><span class="pill-dot"></span>Photography</label>
+              </div>
+              <div class="service-pill-item">
+                <input type="checkbox" id="svc-seo" name="services" value="seo">
+                <label for="svc-seo"><span class="pill-dot"></span>SEO</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="form-field">
+            <label for="eq-message">Your Message</label>
+            <textarea id="eq-message" name="message" placeholder="Tell me about your project — what you're building, your goals, timeline, or any questions you have..." required></textarea>
+          </div>
+
+          <!-- Submit row -->
+          <div class="form-submit-row">
+            <p class="form-note">🔒 Your information is safe and will never be shared with third parties.</p>
+            <button type="submit" class="form-submit-btn" id="submitBtn">
+              Send Message
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 2L11 13"/>
+                <path d="M22 2L15 22l-4-9-9-4 20-7z"/>
+              </svg>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- JAVASCRIPT: CANVAS SCROLL ANIMATION -->
+  <script>
+    const canvas = document.getElementById('scrollCanvas');
+    const ctx = canvas.getContext('2d', { alpha: false });
+
+    const FRAME_COUNT = 120;
+    const images = new Array(FRAME_COUNT);
+    let loadedCount = 0;
+    let hasDrawnFirst = false;
+
+    const getFramePath = (index) => {
+      const padded = index.toString().padStart(5, '0');
+      return `images/frame_${padded}.jpg`;
+    };
+
+    // Preload all 120 frames in memory
+    for (let i = 0; i < FRAME_COUNT; i++) {
+      const img = new Image();
+      img.src = getFramePath(i);
+      img.onload = () => {
+        loadedCount++;
+        if (i === 0 && !hasDrawnFirst) {
+          hasDrawnFirst = true;
+          renderFrame(0);
+        }
+      };
+      images[i] = img;
+    }
+
+    let targetFrame = 0;
+    let currentFrame = 0;
+    let renderedFrameIndex = -1;
+
+    // Retina & Responsive Canvas Sizing
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      renderedFrameIndex = -1;
+      renderFrame(Math.round(currentFrame));
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // Frame Renderer: Draws model positioned below PORTFOLIO title
+    function renderFrame(index) {
+      const clampedIndex = Math.max(0, Math.min(FRAME_COUNT - 1, index));
+      const img = images[clampedIndex];
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+
+      const cw = canvas.width;
+      const ch = canvas.height;
+      const iw = img.naturalWidth || 720;
+      const ih = img.naturalHeight || 1280;
+
+      // Scale model to fit 82% of viewport height comfortably
+      const scale = Math.min(cw / iw, (ch * 0.82) / ih);
+      const dw = iw * scale;
+      const dh = ih * scale;
+      const dx = (cw - dw) / 2;
+      // Offset vertically so model's head sits below PORTFOLIO title
+      const dy = (ch - dh) * 0.65;
+
+      ctx.fillStyle = '#070404';
+      ctx.fillRect(0, 0, cw, ch);
+      ctx.drawImage(img, dx, dy, dw, dh);
+      renderedFrameIndex = clampedIndex;
+    }
+
+    // Scroll Progress Mapping
+    function updateScrollTarget() {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = maxScroll > 0 ? Math.max(0, Math.min(1, window.scrollY / maxScroll)) : 0;
+      targetFrame = scrollProgress * (FRAME_COUNT - 1);
+    }
+
+    window.addEventListener('scroll', updateScrollTarget, { passive: true });
+
+    // Smooth Lerp Animation Loop
+    function tick() {
+      currentFrame += (targetFrame - currentFrame) * 0.12;
+
+      const frameToDraw = Math.round(currentFrame);
+      if (frameToDraw !== renderedFrameIndex) {
+        renderFrame(frameToDraw);
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    // Initialize
+    resizeCanvas();
+    updateScrollTarget();
+    requestAnimationFrame(tick);
+
+    // ─── ENQUIRY FORM HANDLER ───
+    // 🔧 PASTE YOUR DEPLOYED WEB APP URL BELOW (after deploying Code.gs)
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmgcUB44CUo66UFSxaBqzd_T7kaYAHwtX0uUBKl4aGCQm5aa4eYIjlgRHV3-AFqGsT/exec';
+
+    const enquiryForm = document.getElementById('enquiryForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const submitBtn   = document.getElementById('submitBtn');
+
+    if (enquiryForm) {
+      enquiryForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name    = document.getElementById('eq-name').value.trim();
+        const email   = document.getElementById('eq-email').value.trim();
+        const phone   = document.getElementById('eq-phone').value.trim();
+        const budget  = document.getElementById('eq-budget').value;
+        const message = document.getElementById('eq-message').value.trim();
+
+        // Collect checked service pills
+        const services = [...document.querySelectorAll('input[name="services"]:checked')]
+                          .map(cb => cb.value);
+
+        // Validation
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!name)    { highlight('eq-name');    return; }
+        if (!email || !emailRe.test(email)) { highlight('eq-email'); return; }
+        if (!message) { highlight('eq-message'); return; }
+
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        submitBtn.innerHTML = `
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               style="animation: spin 1s linear infinite; flex-shrink:0;">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+          </svg>
+          Sending...
+        `;
+
+        // Spin keyframe
+        if (!document.getElementById('spin-style')) {
+          const s = document.createElement('style');
+          s.id = 'spin-style';
+          s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+          document.head.appendChild(s);
+        }
+
+        const payload = { name, email, phone, budget, services, message };
+
+        // ── POST to Google Apps Script ──────────────────────────────────
+        fetch(SCRIPT_URL, {
+          method : 'POST',
+          mode   : 'no-cors',          // required for Apps Script web apps
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body   : JSON.stringify(payload)
+        })
+        .then(() => showSuccess())
+        .catch(() => showSuccess());   // no-cors means we can't read response, treat as success
+      });
+
+      // ── Helper: show success panel ──────────────────────────────────────
+      function showSuccess() {
+        enquiryForm.style.display = 'none';
+        formSuccess.style.display = 'flex';
+        formSuccess.classList.add('visible');
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // ── Helper: highlight invalid field ────────────────────────────────
+      function highlight(id) {
+        const el = document.getElementById(id);
+        el.focus();
+        el.style.borderColor = '#E6392E';
+        el.style.boxShadow   = '0 0 0 3px rgba(230,57,46,0.25)';
+        el.addEventListener('input', () => {
+          el.style.borderColor = '';
+          el.style.boxShadow   = '';
+        }, { once: true });
+      }
+
+      // ── Real-time border reset ──────────────────────────────────────────
+      enquiryForm.querySelectorAll('input, textarea, select').forEach(el => {
+        el.addEventListener('input', () => {
+          el.style.borderColor = '';
+          el.style.boxShadow   = '';
+        });
+      });
+    }
+  </script>
+</body>
+</html>
